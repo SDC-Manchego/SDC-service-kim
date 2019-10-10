@@ -6,7 +6,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      initial = 'Hello World!'
+      initial: 'Hello World!'
     }
   }
 
@@ -19,5 +19,5 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
 
