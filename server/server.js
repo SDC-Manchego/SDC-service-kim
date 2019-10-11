@@ -18,7 +18,7 @@ app.use('/', express.static('client/public'));
 
 app.get('/api/photos', (req, res) => {
   db.getAllPhotos((err, result) => {
-    res.send(result);
+    res.json(result);
   });
 });
 
