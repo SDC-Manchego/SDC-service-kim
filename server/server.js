@@ -3,6 +3,9 @@ const express = require('express');
 const morgan = require('morgan');
 // app creation
 const app = express();
+
+// import database
+const db = require('../database/index.js');
 // port to listen
 const port = 3001;
 
@@ -14,7 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', express.static('client/public'));
 
 app.get('/api/photos', (req, res) => {
-  res.send('Hello World');
+  db.getAllPhotos((err, result) => {
+    res.send(result);
+  });
 });
 
 // listen on port
