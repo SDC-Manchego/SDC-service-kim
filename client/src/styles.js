@@ -27,7 +27,8 @@ const styles = {
     width: '50px',
     border: 'none',
     margin: '0px 20px 0px 20px',
-    fontSize: '25px'
+    fontSize: '25px',
+    outline: 'none'
   }
 }
 
