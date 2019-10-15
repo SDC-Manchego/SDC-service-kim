@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Card from './card.jsx';
+import styles from './styles.js';
+import SmallCard from './smallcard.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -10,6 +13,7 @@ class App extends React.Component {
       mainPic: '',
       photos: []
     }
+    this.changeMainPic = this.changeMainPic.bind(this);
   }
 
   componentDidMount() {
@@ -31,11 +35,12 @@ class App extends React.Component {
     });
   }
   // click handler for changing mainpic based off smolpic (need to make component now)
-  // changeMainPic() {
-  //   this.setState({
-  //     mainPic: this.props.image_url
-  //   });
-  // }
+  changeMainPic(newMainPic) {
+    this.setState({
+      mainPic: newMainPic
+    })
+  }
+
   nextProp () {
     const newIdx = this.state.mainPic.index+1
     this.setState({
@@ -55,17 +60,26 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <button
-        onClick={() => this.prevProp()}
-        disabled={this.state.mainPic.index === 0}
-        >Prev</button>
-        <button
-        onClick={() => this.nextProp()}
-        disabled={this.state.mainPic.index === this.state.photos.length-1}
-        >Next</button>
-        <Card pic={this.state.mainPic}/>
+        <div style={styles.productContainer}>
+        <div style={styles.leftGroup}>
         {this.state.photos.map((photo) =>
-          <img src={photo.image_url}/>)}
+          <SmallCard
+          changeMainPic={this.changeMainPic}
+          pic={photo}/>
+          )}
+        </div>
+          <button
+          style={styles.button}
+          onClick={() => this.prevProp()}
+          disabled={this.state.mainPic.index === 0}
+          ><i class="fas fa-arrow-left"></i></button>
+          <Card pic={this.state.mainPic}/>
+          <button
+          style={styles.button}
+          onClick={() => this.nextProp()}
+          disabled={this.state.mainPic.index === this.state.photos.length-1}
+          ><i class="fas fa-arrow-right"></i></button>
+        </div>
       </div>
     )
   }
