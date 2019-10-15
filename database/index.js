@@ -10,6 +10,7 @@ db.once('open', () => {
 
 let photoSchema = mongoose.Schema({
   product: String,
+  index: Number,
   color: String,
   image_url: String
 });
@@ -17,7 +18,7 @@ let photoSchema = mongoose.Schema({
 let Photos = mongoose.model('Photos', photoSchema);
 
 let getAllPhotos = (callback) => {
-  return Photos.find({}, {}, { color: "Hyllie dark gray", limit: 7 }).exec((err, result) => {
+  return Photos.find({}, {}, { sort: { index: 1 }, limit: 8 }).exec((err, result) => {
     if(err) {
       callback(err, null);
     } else {
