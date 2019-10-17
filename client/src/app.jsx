@@ -11,7 +11,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       mainPic: '',
-      photos: []
+      photos: [],
+      counter: 0
     }
     this.changeMainPic = this.changeMainPic.bind(this);
   }
@@ -55,13 +56,17 @@ class App extends React.Component {
     })
   }
 
-
+  increase() {
+    this.setState({
+      counter: this.state.counter+1
+    })
+  }
 
   render() {
     return(
       <div>
         <div style={styles.productContainer}>
-        <div style={styles.leftGroup}>
+        <div className='test' style={styles.leftGroup}>
         {this.state.photos.map((photo) =>
           <SmallCard
           changeMainPic={this.changeMainPic}
@@ -85,5 +90,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
-
+export default App;
