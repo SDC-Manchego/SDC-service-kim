@@ -1,10 +1,19 @@
+// importing react
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+// importing jquery $
 import $ from 'jquery';
+
+// importing transitions
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import '../public/style.css';
+
+// importing React Components
 import Card from './card.jsx';
 import styles from './styles.js';
 import SmallCard from './smallcard.jsx';
-
+import Zoom from './zoom.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,9 +21,13 @@ class App extends React.Component {
     this.state = {
       mainPic: '',
       photos: [],
-      counter: 0
+      zoomed: false,
+      count: 0,
+      nextOrPrev: true
     }
     this.changeMainPic = this.changeMainPic.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.toggleZoom = this.toggleZoom.bind(this);
   }
 
   componentDidMount() {
@@ -26,8 +39,6 @@ class App extends React.Component {
       url: '/api/photos',
       type: 'GET',
       success: (photos) => {
-        console.log('DEEEZ DEM PHOTOS ---->', photos);
-        console.log('mainPic???--->', photos[0].image_url);
         this.setState({
           mainPic: photos[0],
           photos: photos
@@ -35,7 +46,7 @@ class App extends React.Component {
       }
     });
   }
-  // click handler for changing mainpic based off smolpic (need to make component now)
+
   changeMainPic(newMainPic) {
     this.setState({
       mainPic: newMainPic
@@ -43,51 +54,108 @@ class App extends React.Component {
   }
 
   nextProp () {
-    const newIdx = this.state.mainPic.index+1
+    const newIdx = this.state.mainPic.index+1;
+
     this.setState({
-      mainPic: this.state.photos[newIdx]
-    })
+      mainPic: this.state.photos[newIdx],
+      count: newIdx,
+      nextOrPrev: true
+    });
   }
 
   prevProp () {
     const newIdx = this.state.mainPic.index-1;
+
     this.setState({
-      mainPic: this.state.photos[newIdx]
+      mainPic: this.state.photos[newIdx],
+      count: newIdx,
+      nextOrPrev: false
+    });
+  }
+
+  toggle(key) {
+    const newCount = key;
+
+    if(newCount > this.state.count) {
+      this.setState({
+        count: newCount,
+        nextOrPrev: true
+      })
+    } else {
+      this.setState({
+        count: newCount,
+        nextOrPrev: false
+      })
+    }
+  }
+
+  toggleZoom() {
+    const prevZoom = this.state.zoomed;
+    this.setState({
+      zoomed: !prevZoom
     })
   }
 
-  increase() {
-    this.setState({
-      counter: this.state.counter+1
-    })
-  }
 
   render() {
-    return(
-      <div>
-        <div style={styles.productContainer}>
-        <div className='test' style={styles.leftGroup}>
-        {this.state.photos.map((photo) =>
-          <SmallCard
-          changeMainPic={this.changeMainPic}
-          pic={photo}/>
-          )}
+    const zoomed = this.state.zoomed;
+    const nextOrPrev = this.state.nextOrPrev;
+
+      return(
+        <div>
+          <div>
+            {zoomed ? (
+              <Zoom
+              toggleZoom={this.toggleZoom}
+              pics={this.state.photos}
+              />
+            ) : (
+          <div style={styles.productContainer}>
+          <div
+          style={styles.leftGroup}>
+          {this.state.photos.map((photo, i) =>
+            <SmallCard
+            changeMainPic={this.changeMainPic}
+            toggle={this.toggle}
+            pic={photo}
+            key={i}/>
+            )}
+          </div>
+            <button
+            style={styles.button}
+            onClick={() =>
+              this.prevProp()
+            }
+            disabled={this.state.mainPic.index === 0}
+            ><i className="fas fa-arrow-left"></i></button>
+              <TransitionGroup style={styles.slider}>
+                <CSSTransition
+                  in={ true }
+                  key= { this.state.count }
+                  timeout={900}
+                  classNames={ nextOrPrev ? "mainPicNext" : "mainPicPrev" }
+                  appear= { false }
+                >
+                  <Card
+                   pic={this.state.mainPic}
+                   toggleZoom={this.toggleZoom}
+                   />
+                </CSSTransition>
+              </TransitionGroup>
+            <button
+            style={styles.button}
+            onClick={() => this.nextProp()}
+            disabled={this.state.mainPic.index === this.state.photos.length-1}
+            ><i className="fas fa-arrow-right"></i></button>
+          </div>
+            )}
+          </div>
         </div>
-          <button
-          style={styles.button}
-          onClick={() => this.prevProp()}
-          disabled={this.state.mainPic.index === 0}
-          ><i class="fas fa-arrow-left"></i></button>
-          <Card pic={this.state.mainPic}/>
-          <button
-          style={styles.button}
-          onClick={() => this.nextProp()}
-          disabled={this.state.mainPic.index === this.state.photos.length-1}
-          ><i class="fas fa-arrow-right"></i></button>
-        </div>
-      </div>
-    )
+      )
   }
 }
 
+
+
 export default App;
+
