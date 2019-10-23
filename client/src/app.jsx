@@ -21,7 +21,7 @@ import styles from './styles.js';
 import SmallCard from './smallcard.jsx';
 import Zoom from './zoom.jsx';
 
-class App extends React.Component {
+class PhotoCarousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,7 +42,7 @@ class App extends React.Component {
 
   getAllPhotos() {
     $.ajax({
-      url: '/api/photos',
+      url: 'http://localhost:3001/api/photos',
       type: 'GET',
       success: (photos) => {
         this.setState({
@@ -158,4 +158,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default PhotoCarousel;
