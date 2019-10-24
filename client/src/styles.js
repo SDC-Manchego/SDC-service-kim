@@ -7,15 +7,18 @@ const styles = {
   productContainer: {
     display: 'flex',
     flexDirection: 'row',
-    height: '858.73px',
-    width: '964px',
+    height: '600.73px',
+    width: '800px',
     alignItems: 'center',
+    marginTop: 'none',
+    // verticalAlign: 'top',
   },
   leftGroup: {
     display: 'flex',
     height: '480px',
     flexDirection: 'column',
-    margin: '0px 55px 0px 20px',
+    margin: '0px 0px 0px 0px',
+    // verticalAlign: 'top',
   },
   button: {
     height: '10px',
@@ -63,6 +66,11 @@ const styles = {
     width: '564px',
     position: 'relative',
   },
+  zoomDiv: {
+    zIndex: '100',
+    position: 'absolute',
+    background: 'white',
+  }
 };
 
 export default styles;

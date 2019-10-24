@@ -8,7 +8,7 @@ import React from 'react';
 import styles from './styles.js';
 
 const Zoom = ({ toggleZoom, pics }) => (
-  <div>
+  <div style={styles.zoomDiv}>
     <div style={styles.exit}>
       <button style={styles.xButton} onClick={() => toggleZoom()}>
         <i className="fas fa-times"></i>
