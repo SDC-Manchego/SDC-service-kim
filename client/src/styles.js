@@ -7,15 +7,17 @@ const styles = {
   productContainer: {
     display: 'flex',
     flexDirection: 'row',
-    height: '858.73px',
-    width: '964px',
-    alignItems: 'center',
+    height: '600.73px',
+    width: '800px',
+    alignItems: 'flex-start',
+    marginTop: 'none',
+
   },
   leftGroup: {
     display: 'flex',
     height: '480px',
     flexDirection: 'column',
-    margin: '0px 55px 0px 20px',
+    marginTop: '15px',
   },
   button: {
     height: '10px',
@@ -63,6 +65,15 @@ const styles = {
     width: '564px',
     position: 'relative',
   },
+  zoomDiv: {
+    zIndex: '100',
+    position: 'absolute',
+    background: 'white',
+  },
+  rightGroup: {
+    display: 'flex',
+    alignItems: 'center'
+  }
 };
 
 export default styles;

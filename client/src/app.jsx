@@ -123,6 +123,7 @@ class PhotoCarousel extends React.Component {
                   />
                 ))}
               </div>
+              <div style={styles.rightGroup}>
               <button
                 style={styles.button}
                 onClick={() => this.prevProp()}
@@ -150,6 +151,7 @@ class PhotoCarousel extends React.Component {
               >
                 <i className="fas fa-arrow-right" />
               </button>
+              </div>
             </div>
           )}
         </div>
