@@ -9,16 +9,15 @@ const styles = {
     flexDirection: 'row',
     height: '600.73px',
     width: '800px',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginTop: 'none',
-    // verticalAlign: 'top',
+
   },
   leftGroup: {
     display: 'flex',
     height: '480px',
     flexDirection: 'column',
-    margin: '0px 0px 0px 0px',
-    // verticalAlign: 'top',
+    marginTop: '15px',
   },
   button: {
     height: '10px',
@@ -70,6 +69,10 @@ const styles = {
     zIndex: '100',
     position: 'absolute',
     background: 'white',
+  },
+  rightGroup: {
+    display: 'flex',
+    alignItems: 'center'
   }
 };
 
