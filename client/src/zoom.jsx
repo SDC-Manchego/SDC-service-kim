@@ -11,7 +11,7 @@ const Zoom = ({ toggleZoom, pics }) => (
   <div style={styles.zoomDiv}>
     <div style={styles.exit}>
       <button style={styles.xButton} onClick={() => toggleZoom()}>
-        <i className="fas fa-times"></i>
+      &#10005;
       </button>
     </div>
     <div style={styles.zoomList}>
