@@ -11,6 +11,7 @@ db.once('open', () => {
 
 const photoSchema = mongoose.Schema({
   product: String,
+  product_id: String,
   index: Number,
   color: String,
   image_url: String,
@@ -19,7 +20,7 @@ const photoSchema = mongoose.Schema({
 const Photos = mongoose.model('Photos', photoSchema);
 
 // eslint-disable-next-line max-len
-const getAllPhotos = (callback) => Photos.find({}, {}, { sort: { index: 1 }, limit: 8 }).exec((err, result) => {
+const getAllPhotos = (id, callback) => Photos.find({ product_id: id }, {}, { sort: { index: 1 }, limit: 8 }).exec((err, result) => {
   if (err) {
     callback(err, null);
   } else {

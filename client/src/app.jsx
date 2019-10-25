@@ -37,13 +37,14 @@ class PhotoCarousel extends React.Component {
   }
 
   componentDidMount() {
-    this.getAllPhotos();
+    this.getAllPhotos(this.urlProductId());
   }
 
-  getAllPhotos() {
+  getAllPhotos(id) {
     $.ajax({
       url: 'http://localhost:3001/api/photos',
       type: 'GET',
+      data: { product_id: id },
       success: (photos) => {
         this.setState({
           mainPic: photos[0],
@@ -51,6 +52,14 @@ class PhotoCarousel extends React.Component {
         });
       },
     });
+  }
+
+  urlProductId() {
+    const questMarkLocation = (window.location.href).indexOf('?');
+    if (questMarkLocation === -1) {
+      return '1';
+    }
+    return (window.location.href).slice(questMarkLocation + 1);
   }
 
   changeMainPic(newMainPic) {

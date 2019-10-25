@@ -23,7 +23,9 @@ app.use('/', express.static('client/public'));
 app.use(cors());
 
 app.get('/api/photos', (req, res) => {
-  db.getAllPhotos((err, result) => {
+  let id = req.query.product_id;
+  console.log(req.query.product_id);
+  db.getAllPhotos(id, (err, result) => {
     res.json(result);
   });
 });
