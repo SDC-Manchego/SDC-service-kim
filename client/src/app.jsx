@@ -138,7 +138,7 @@ class PhotoCarousel extends React.Component {
                 onClick={() => this.prevProp()}
                 disabled={this.state.mainPic.index === 0}
               >
-                <i className="fas fa-arrow-left" />
+                &#8592;
               </button>
               <TransitionGroup style={styles.slider}>
                 <CSSTransition
@@ -158,7 +158,7 @@ class PhotoCarousel extends React.Component {
                   this.state.mainPic.index === this.state.photos.length - 1
                 }
               >
-                <i className="fas fa-arrow-right" />
+                &#8594;
               </button>
               </div>
             </div>
