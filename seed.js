@@ -5,6 +5,7 @@
 const { db } = require('./database/index.js');
 const { Photos } = require('./database/index.js');
 
+//40 seeds
 const seeds = [
   {
     product: 'FRIHETEN',
@@ -312,3 +313,5 @@ seeds.forEach((seed, i) => {
   });
 });
 };
+
+module.exports.seeds = seeds;

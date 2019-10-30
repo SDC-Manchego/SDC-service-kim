@@ -28,8 +28,28 @@ const getAllPhotos = (id, callback) => Photos.find({ product_id: id }, {}, { sor
   }
 });
 
+let counter = 105;
+const savePhotos = (seed) => {
+    counter++;
+
+  let photos = new Photos({
+    product: seed.product,
+    product_id: counter.toString(),
+    index: seed.index,
+    color: seed.color,
+    image_url: seed.image_url,
+  });
+
+  photos.save((err, pictures) => {
+    if(err) return console.error(err);
+    console.log('pictures saved successfully!!', pictures)
+  })
+
+}
+
 module.exports = {
   Photos,
   db,
   getAllPhotos,
+  savePhotos
 };
