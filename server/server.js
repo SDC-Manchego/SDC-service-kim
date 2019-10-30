@@ -24,8 +24,8 @@ app.use(cors());
 
 app.get('/api/photos', (req, res) => {
   let id = req.query.product_id;
-  console.log(req.query.product_id);
-  db.getAllPhotos(id, (err, result) => {
+  console.log('prod id --->', req.query.product_id);
+  db.getAllPhotos(1, (err, result) => {
     res.json(result);
   });
 });
