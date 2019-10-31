@@ -22,7 +22,7 @@ const Photos = mongoose.model('Photos', photoSchema);
 // eslint-disable-next-line max-len
 const getAllPhotos = (id, callback) => Photos.find({ product_id: id }, {}, { sort: { index: 1 }, limit: 8 }).exec((err, result) => {
   if (err) {
-    callback(err, null);
+    callback(err);
   } else {
     callback(null, result);
   }
@@ -49,20 +49,20 @@ const updatePhoto = (id, color, callback) => {
     
   Photos.findOneAndUpdate({product_id: id}, color, {new: true}, (err, res) => {
     if(err) {
-      console.log('something went wrong updating data!')
+      callback(err)
     };
 
-    callback(err, res)
+      callback(null, res)
   });
 }
 
 const deletePhoto = (id, callback) => {
-console.log('from database delete', id)
+
   Photos.deleteOne({product_id: id}, (err, res) => {
     if(err) {
-      console.log('something went wrong with delete req!')
+      callback(err)
     } else {
-      callback(err, res)
+      callback(null, res)
     }
   })
 
