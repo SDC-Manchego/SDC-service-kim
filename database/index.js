@@ -28,13 +28,11 @@ const getAllPhotos = (id, callback) => Photos.find({ product_id: id }, {}, { sor
   }
 });
 
-let counter = 105;
-const savePhotos = (seed) => {
-    counter++;
-
+const savePhotos = (seed, callback) => {
+  
   let photos = new Photos({
     product: seed.product,
-    product_id: counter.toString(),
+    product_id: seed.product_id,
     index: seed.index,
     color: seed.color,
     image_url: seed.image_url,
@@ -42,7 +40,30 @@ const savePhotos = (seed) => {
 
   photos.save((err, pictures) => {
     if(err) return console.error(err);
-    console.log('pictures saved successfully!!', pictures)
+    callback(err, pictures)
+  })
+
+}
+
+const updatePhoto = (id, color, callback) => {
+    
+  Photos.findOneAndUpdate({product_id: id}, color, {new: true}, (err, res) => {
+    if(err) {
+      console.log('something went wrong updating data!')
+    };
+
+    callback(err, res)
+  });
+}
+
+const deletePhoto = (id, callback) => {
+console.log('from database delete', id)
+  Photos.deleteOne({product_id: id}, (err, res) => {
+    if(err) {
+      console.log('something went wrong with delete req!')
+    } else {
+      callback(err, res)
+    }
   })
 
 }
@@ -51,5 +72,7 @@ module.exports = {
   Photos,
   db,
   getAllPhotos,
-  savePhotos
+  savePhotos,
+  updatePhoto,
+  deletePhoto
 };
