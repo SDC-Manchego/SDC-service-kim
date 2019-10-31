@@ -22,14 +22,57 @@ const Photos = mongoose.model('Photos', photoSchema);
 // eslint-disable-next-line max-len
 const getAllPhotos = (id, callback) => Photos.find({ product_id: id }, {}, { sort: { index: 1 }, limit: 8 }).exec((err, result) => {
   if (err) {
-    callback(err, null);
+    callback(err);
   } else {
     callback(null, result);
   }
 });
 
+const savePhotos = (seed, callback) => {
+  
+  let photos = new Photos({
+    product: seed.product,
+    product_id: seed.product_id,
+    index: seed.index,
+    color: seed.color,
+    image_url: seed.image_url,
+  });
+
+  photos.save((err, pictures) => {
+    if(err) return console.error(err);
+    callback(err, pictures)
+  })
+
+}
+
+const updatePhoto = (id, color, callback) => {
+    
+  Photos.findOneAndUpdate({product_id: id}, color, {new: true}, (err, res) => {
+    if(err) {
+      callback(err)
+    };
+
+      callback(null, res)
+  });
+}
+
+const deletePhoto = (id, callback) => {
+
+  Photos.deleteOne({product_id: id}, (err, res) => {
+    if(err) {
+      callback(err)
+    } else {
+      callback(null, res)
+    }
+  })
+
+}
+
 module.exports = {
   Photos,
   db,
   getAllPhotos,
+  savePhotos,
+  updatePhoto,
+  deletePhoto
 };
