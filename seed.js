@@ -314,4 +314,11 @@ seeds.forEach((seed, i) => {
 });
 };
 
+<<<<<<< HEAD
 module.exports.seeds = seeds;
+=======
+module.exports.seeds = seeds;
+
+
+
+>>>>>>> c812eee7831075226900ebe8b0e13f88a1911e28

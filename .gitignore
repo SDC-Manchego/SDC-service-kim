@@ -1,2 +1,7 @@
 node_modules
+<<<<<<< HEAD
 keysOnKeys.pem
+=======
+keysOnKeys.pem
+photo.csv
+>>>>>>> c812eee7831075226900ebe8b0e13f88a1911e28
