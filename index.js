@@ -20,6 +20,8 @@ const text1 = `INSERT INTO photo (product, color, imageurl) VALUES ('onemo', 'bl
 
 const view = `SELECT * FROM photo`;
 
+const sampleQuery = `SELECT * FROM photo where id > 9999990`
+
 const filePath = path.join(__dirname, 'photo.csv')
 const csvToPsql = `COPY photo FROM '${filePath}' DELIMITER ',' CSV`
 
@@ -44,7 +46,9 @@ client.connect()
     // .then(() => client.query(`DROP TABLE photo`))
     // .then(() => client.query( view ))
     // .then((res) => console.log(res.rows.length))
-    .then(() => client.query(csvToPsql))
+    // .then(() => client.query(csvToPsql))
+    .then(() => client.query(sampleQuery))
+    .then((res) => console.log(res) )
     .then(() => console.log('i got this far'))
     .catch(e => console.log('did not work!!', e))
 

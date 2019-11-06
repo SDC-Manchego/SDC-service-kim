@@ -1,0 +1,54 @@
+//POSTGRESQL//
+SELECT * FROM photo where id > 9999990
+
+rows:
+   [ { id: 9999991,
+       product: 'Computer',
+       color: 'magenta',
+       imageurl: 'http://lorempixel.com/640/480/sports' },
+     { id: 9999992,
+       product: 'Computer',
+       color: 'salmon',
+       imageurl: 'http://lorempixel.com/640/480/nature' },
+     { id: 9999993,
+       product: 'Shirt',
+       color: 'black',
+       imageurl: 'http://lorempixel.com/640/480/sports' },
+     { id: 9999994,
+       product: 'Gloves',
+       color: 'green',
+       imageurl: 'http://lorempixel.com/640/480/technics' },
+     { id: 9999995,
+       product: 'Soap',
+       color: 'azure',
+       imageurl: 'http://lorempixel.com/640/480/transport' },
+     { id: 9999996,
+       product: 'Gloves',
+       color: 'cyan',
+       imageurl: 'http://lorempixel.com/640/480/sports' },
+     { id: 9999997,
+       product: 'Hat',
+       color: 'sky blue',
+       imageurl: 'http://lorempixel.com/640/480/nature' },
+     { id: 9999998,
+       product: 'Chair',
+       color: 'green',
+       imageurl: 'http://lorempixel.com/640/480/technics' },
+     { id: 9999999,
+       product: 'Soap',
+       color: 'plum',
+       imageurl: 'http://lorempixel.com/640/480/animals' },
+     { id: 10000000,
+       product: 'Towels',
+       color: 'lavender',
+       imageurl: 'http://lorempixel.com/640/480/technics' } ]
+
+
+       --------------------------------------------------------------
+
+       //CASSANDRA//
+       cqlsh:sdc> SELECT * FROM ikea WHERE id = 9999990;
+
+ id      | color | imageurl | product
+---------+-------+----------+--------------------------------------
+ 9999990 | Shoes |   orchid | http://lorempixel.com/640/480/sports
