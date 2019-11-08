@@ -1,3 +1,5 @@
+var nr = require('newrelic');
+
 /* eslint-disable no-console */
 const express = require('express');
 // extra middleware to import
@@ -12,6 +14,8 @@ const cors = require('cors');
 const db = require('../database/index.js');
 // port to listen
 const port = 3001;
+
+const pool = require('../queries.js');
 
 
 // const seed = require('../seed.js');
@@ -28,49 +32,53 @@ app.use(cors());
 app.get('/api/photos', (req, res) => {
   let id = req.query.product_id;
   console.log('prod id --->', req.query.product_id);
-  db.getAllPhotos(id, (err, result) => {
-    res.json(result);
-  });
+  let queryVar = `SELECT * FROM photo where id = ${id}`
+
+  pool.query(queryVar, (err, result) => {
+    if(err) {
+      console.log(err)
+    }
+    res.status(200).json(result.rows)
+  })
 });
 
 app.post('/api/photos', (req, res) => {
-  db.savePhotos(req.body, (err, result) => {
+  let queryVar = `INSERT INTO photo (id, product, color, imageurl) VALUES ('${req.body.id}','${req.body.product}', '${req.body.color}', '${req.body.imageurl}')`
+
+  pool.query(queryVar, (err, result) => {
     if(err) {
-      console.log('error with saving to db', err)
-    } else {
-      console.log('succesful! and here is the result', result)
+      console.log(err)
     }
+    res.status(200).json(result)
   })
-  res.send()
 }); 
 
 app.put('/api/photos', (req, res) => {
   let id = req.query.product_id;
-  let newColor = req.body
+  let key = Object.keys(req.body)[0];
+  let value = Object.values(req.body)[0];
 
-  db.updatePhoto(id, newColor, (err, result) => {
+  let queryVar = `UPDATE photo SET ${key} = '${value}' WHERE photo.id = ${id}`
+  
+  pool.query(queryVar, (err, result) => {
     if(err) {
-      console.log('error with updating to db!', err)
-    } else {
-      console.log('successful update!', result)
+      console.log(err)
     }
+    res.status(200).json(result)
   })
-
-  res.send(`Received req to update ${id} , ${newColor}`)
 })
 
 app.delete('/api/photos', (req, res) => {
   let id = req.query.product_id;
+  let queryVar = `DELETE FROM photo WHERE id = ${id}`;
 
-  db.deletePhoto(id, (err, result) => {
+  pool.query(queryVar, (err, result) => {
     if(err) {
-      console.log('error with delete from db!', err)
-    } else {
-      console.log('success deleting!', result)
+      console.log(err)
     }
+    res.status(200).json(result)
   })
 
-  res.send(`delete request received ${id}`)
 })
 
 

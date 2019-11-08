@@ -20,11 +20,6 @@
     "babel-loader": "^8.0.6",
     "cors": "^2.8.5",
     "css-loader": "^3.2.0",
-<<<<<<< HEAD
-=======
-    "csv-write-stream": "^2.0.0",
-    "csv-writer": "^1.5.0",
->>>>>>> c812eee7831075226900ebe8b0e13f88a1911e28
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.5.1",
@@ -32,19 +27,12 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-react": "^7.16.0",
     "express": "^4.17.1",
-<<<<<<< HEAD
-=======
-    "faker": "^4.1.0",
-    "increase-memory-limit": "^1.0.7",
->>>>>>> c812eee7831075226900ebe8b0e13f88a1911e28
     "jquery": "^3.4.1",
     "mongoose": "^5.7.4",
     "morgan": "^1.9.1",
+    "newrelic": "^6.1.0",
     "nodemon": "^1.19.3",
-<<<<<<< HEAD
-=======
     "pg": "^7.12.1",
->>>>>>> c812eee7831075226900ebe8b0e13f88a1911e28
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-test-renderer": "^16.10.2",
